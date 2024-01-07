@@ -11,8 +11,6 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
-//const pages = ["Order Pizza", "My Orders"];
-//create pagesobject with two values name and route
 const pages = [
   { id: 1, name: "Order Pizza", route: "/" },
   { id: 2, name: "My Orders", route: "/orders" },
@@ -34,33 +32,26 @@ function ResponsiveAppBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <LocalPizzaIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            Pizza App
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
             >
+              <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+                Pizza App
+              </Link>
+            </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="inherit">
               <MenuIcon />
             </IconButton>
             <Menu
@@ -83,10 +74,7 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                  <Link
-                    to={page.route}
-                    style={{ textDecoration: "none", color: "inherit" }}
-                  >
+                  <Link to={page.route} style={{ textDecoration: "none", color: "inherit" }}>
                     <Typography textAlign="center">{page.name}</Typography>
                   </Link>
                 </MenuItem>
@@ -98,8 +86,7 @@ function ResponsiveAppBar() {
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component="div"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -111,19 +98,15 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            Pizza App
+            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+              Pizza App
+            </Link>
           </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page.name}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                <Link
-                  to={page.route}
-                  style={{ textDecoration: "none", color: "inherit" }}
-                >
+              <Button key={page.name} onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
+                <Link to={page.route} style={{ textDecoration: "none", color: "inherit" }}>
                   {page.name}
                 </Link>
               </Button>

@@ -1,13 +1,12 @@
-import {
-  Grid,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-} from "@mui/material";
+import { Grid, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from "@mui/material";
+import { useFetchData } from "../CustomHooks/useFetchData";
 
-const PizzaSizeSelection = ({ sizes, formData, handleSizeChange }) => {
+const PizzaSizeSelection = ({ formData, setFormData }) => {
+  const sizes = useFetchData("/api/pizzaSizes");
+
+  const handleSizeChange = (event) => {
+    setFormData({ ...formData, size: event.target.value });
+  };
   return (
     <FormControl component="fieldset">
       <FormLabel component="legend">Pizza Size</FormLabel>
@@ -15,16 +14,7 @@ const PizzaSizeSelection = ({ sizes, formData, handleSizeChange }) => {
         <Grid container spacing={2} alignItems="center">
           {sizes.map((pizza, index) => (
             <Grid item xs={12} sm={4} key={index}>
-              <FormControlLabel
-                value={pizza.id}
-                control={
-                  <Radio
-                    checked={formData.size.toString() === pizza.id.toString()}
-                    onChange={handleSizeChange}
-                  />
-                }
-                label={pizza.size}
-              />
+              <FormControlLabel value={pizza.id} control={<Radio checked={formData.size.toString() === pizza.id.toString()} onChange={handleSizeChange} />} label={pizza.size} />
             </Grid>
           ))}
         </Grid>
