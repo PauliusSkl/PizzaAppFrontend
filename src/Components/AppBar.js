@@ -9,8 +9,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import { Link } from "react-router-dom";
 import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 const pages = [
   { id: 1, name: "Order Pizza", route: "/" },
   { id: 2, name: "My Orders", route: "/orders" },
@@ -18,7 +19,7 @@ const pages = [
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-
+  const navigate = useNavigate();
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -32,24 +33,24 @@ function ResponsiveAppBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <LocalPizzaIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-                Pizza App
-              </Link>
-            </Typography>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+              Pizza App
+            </Link>
+          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="inherit">
               <MenuIcon />
@@ -73,10 +74,14 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                  <Link to={page.route} style={{ textDecoration: "none", color: "inherit" }}>
-                    <Typography textAlign="center">{page.name}</Typography>
-                  </Link>
+                <MenuItem
+                  key={page.name}
+                  onClick={(event) => {
+                    handleCloseNavMenu(event);
+                    navigate(page.route);
+                  }}
+                >
+                  <Typography textAlign="center">{page.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -105,10 +110,15 @@ function ResponsiveAppBar() {
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button key={page.name} onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
-                <Link to={page.route} style={{ textDecoration: "none", color: "inherit" }}>
-                  {page.name}
-                </Link>
+              <Button
+                key={page.name}
+                onClick={(event) => {
+                  handleCloseNavMenu(event);
+                  navigate(page.route);
+                }}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                {page.name}
               </Button>
             ))}
           </Box>

@@ -15,9 +15,14 @@ const CurrentPriceDisplay = ({ formData, currentPrice, setCurrentPrice }) => {
   }, [formData, setCurrentPrice]);
 
   return (
-    <Typography variant="h6">
-      Price: $<span id="price">{currentPrice}</span>
-    </Typography>
+    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+      <Typography variant="h6">
+        Price:
+      </Typography>
+      <Typography variant="h6">
+        $<span id="price">{currentPrice}</span>
+      </Typography>
+    </div>
   );
 };
 

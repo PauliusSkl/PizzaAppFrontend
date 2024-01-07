@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Poppup = ({message, type, duration}) => {
  
     const toastOptions = {
-        position: "top-center",
+        position: "top-right",
         autoClose: duration,
         hideProgressBar: false,
         closeOnClick: true,
