@@ -1,36 +1,40 @@
 import React from "react";
 import { Box, Typography, Grid, Button } from "@mui/material";
 import axios from "axios";
-import PizzaSizeSelection from "../Components/PizzaSizeSelector";
-import PizzaToppingsSelection from "../Components/PizzaToppingSelection";
-import CurrentPriceDisplay from "../Components/CurrentPriceDisplay";
+import PizzaSizeSelection from "./PizzaSizeSelector";
+import PizzaToppingsSelection from "./PizzaToppingSelection";
+import CurrentPriceDisplay from "./CurrentPriceDisplay";
 import PizzaImage from "./PizzaImage";
 import { useState } from "react";
 import { ToastContainer } from "react-toastify";
-import Poppup from "../Components/Poppup";
-import 'react-toastify/dist/ReactToastify.css';
-import Divider from '@mui/material/Divider';
+import Poppup from "../../../Poppup";
+import "react-toastify/dist/ReactToastify.css";
+import Divider from "@mui/material/Divider";
 const PizzaForm = () => {
+  
   const [formData, setFormData] = useState({ size: "", toppingIds: [] });
   const [currentPrice, setCurrentPrice] = useState(0);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!formData.size) {
-        Poppup({message: "Please select a size", type: "error", duration: 2500});
-        return;
+      Poppup({ message: "Please select a size", type: "error", duration: 2500 });
+      return;
     }
+
     await axios.post("https://king-prawn-app-dndfk.ondigitalocean.app/api/pizzas", formData);
+
     setFormData({ size: "", toppingIds: [] });
     setCurrentPrice(0);
-    Poppup({message: "Order placed successfully", type: "success", duration: 1500});
+    Poppup({ message: "Order placed successfully", type: "success", duration: 1500 });
   };
+
   return (
     <Box
       component="form"
       onSubmit={handleSubmit}
       sx={{
-        maxWidth: '100%',
+        maxWidth: "100%",
         width: "100%",
         margin: "auto",
         padding: 3,
@@ -47,12 +51,11 @@ const PizzaForm = () => {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <PizzaSizeSelection formData={formData} setFormData={setFormData} />
-          <Divider sx={"margin-top: 5px;"}/>
+          <Divider sx={"margin-top: 5px;"} />
         </Grid>
-        
         <Grid item xs={12}>
           <PizzaToppingsSelection formData={formData} setFormData={setFormData} />
-          <Divider sx={"margin-top: 5px;"}/>
+          <Divider sx={"margin-top: 5px;"} />
         </Grid>
         <Grid item xs={12}>
           <CurrentPriceDisplay formData={formData} currentPrice={currentPrice} setCurrentPrice={setCurrentPrice} />
@@ -63,7 +66,7 @@ const PizzaForm = () => {
           </Button>
         </Grid>
       </Grid>
-        <ToastContainer />
+      <ToastContainer />
     </Box>
   );
 };

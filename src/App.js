@@ -1,8 +1,9 @@
 import "./App.css";
-import OrderPage from "./Pages/OrderPage";
-import OrderListPage from "./Pages/OrdersListPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ResponsiveAppBar from "./Components/AppBar";
+
+import OrderPage from "./Components/Pages/OrderFormPage/OrderPage";
+import OrderListPage from "./Components/Pages/OrderListPage/OrdersListPage";
 function App() {
   return (
     <div className="App">

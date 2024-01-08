@@ -18,11 +18,15 @@ const pages = [
 ];
 
 function ResponsiveAppBar() {
+  
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate();
+
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);

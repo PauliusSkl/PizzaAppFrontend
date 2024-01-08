@@ -1,8 +1,8 @@
-import { Container } from "@mui/material";
-import { useFetchData } from "../CustomHooks/useFetchData";
+import Layout from "../../Layout";
+import { useFetchData } from "../../CustomHooks/useFetchData";
 import React from "react";
 import { useState } from "react";
-import OrdersList from "../Components/OrdersList";
+import OrdersList from "./components/OrdersList";
 import { TableContainer, Paper, TablePagination } from "@mui/material";
 
 const OrdersListPAge = () => {
@@ -16,11 +16,7 @@ const OrdersListPAge = () => {
   const displayedOrders = orders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
-    <Container
-      sx={{
-        marginY: 3,
-      }}
-    >
+    <Layout xs="100%" sm="100%" md="100%" lg="100%"> 
       <TableContainer component={Paper}>
         <OrdersList orders={displayedOrders} />
         <TablePagination 
@@ -32,7 +28,7 @@ const OrdersListPAge = () => {
         onRowsPerPageChange={(event) => setRowsPerPage(parseInt(event.target.value, 10))}
          />
       </TableContainer>
-    </Container>
+      </Layout>
   );
 };
 

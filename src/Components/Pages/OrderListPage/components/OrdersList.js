@@ -19,6 +19,7 @@ const OrdersList = ({ orders }) => {
     }
     return 0;
   });
+  
   return (
     <Table>
       <TableHead>
